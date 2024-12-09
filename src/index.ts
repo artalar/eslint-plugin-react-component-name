@@ -10,10 +10,9 @@ const handler =
     const functionName = node.id?.name; // Current function name
 
     if (!functionName || (parentVarName && functionName !== parentVarName)) {
-      console.log('MATCH', target)
       context.report({
         node,
-        message: "Function should have a name matching its parent variable.",
+        messageId: "noAnonymousFunction",
         fix: (fixer) => {
           const sourceCode = context.getSourceCode();
           const newName = parentVarName || "Anything";
@@ -78,7 +77,8 @@ const rule: Rule.RuleModule = {
           targets: {
             type: "array",
             items: { type: "string" },
-            description: "List of React helpers to enforce named functions.",
+            description:
+              "List of a component decorators to enforce named functions.",
           },
         },
         additionalProperties: false,
