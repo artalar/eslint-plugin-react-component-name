@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-react-component-name",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.3",
   "type": "module",
   "description": "Eslint plugin for converting decorated anonymous functions to named functions.",
   "exports": "./src/index.ts",
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/artalar/eslint-plugin-react-component-name#readme",
   "devDependencies": {
+    "@types/eslint": "^9.6.1",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@typescript-eslint/rule-tester": "^7.18.0",
