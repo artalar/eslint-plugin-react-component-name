@@ -2,9 +2,10 @@
 
 ## Motivation
 
-- **Autofix** that uses variable name.
-- **Better error traces** in console.
+- **Autofix** based on variable name.
+- **Better error traces** in console for debug.
 - **Support for any High-order components** and compositions (e.g. MobX's `observer` or nesting like `memo(forwardRef(() => <div />))`)
+- **Universal** solution based solely on ESLint.
 
 ---
 
