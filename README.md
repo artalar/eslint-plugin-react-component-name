@@ -2,11 +2,10 @@
 
 ## Motivation
 
-- The default ESLint rules for React checking `displayName` property of a component, but has no autofix.
-- There is a few bundlers which support automatic `displayName` inlining, but it isn't universal, as eslint rule.
-- We want to support all kind of decorators like `observer` from 'mobx-react' or `reatomComponent` from '@reatom/npm-react'.
-- Handle nested decorators (e.g. `memo(forwardRef(() => <div />))`)
-- It is important to use **named function** instead of additional `displayName`, to avoid ambiguity in error **stack traces**.
+- **Autofix** based on variable name.
+- **Better error traces** in console for debug.
+- **Support for any High-order components** and compositions (e.g. MobX's `observer` or nesting like `memo(forwardRef(() => <div />))`)
+- **Universal** solution based solely on ESLint.
 
 ---
 
