@@ -47,6 +47,18 @@ ruleTester.run(
         code: "const MyComponent = observer(SomeOtherComponent);",
         options,
       },
+      {
+        code: "export default memo(function MyComponent() { return <div />; });",
+        options,
+      },
+      {
+        code: "const MyComponent = memo(forwardRef(SomeOtherComponent));",
+        options,
+      },
+      {
+        code: "const MyComponent = memo(forwardRef(function MyComponent() { return <div />; }));",
+        options,
+      },
     ],
     invalid: [
       {
@@ -81,8 +93,6 @@ ruleTester.run(
         code: "export default observer(function () { return <div />; });",
         options,
         errors,
-        output:
-          "export default observer(function Anything() { return <div />; });",
       },
       {
         code: `const MyComponent = observer(
@@ -93,6 +103,13 @@ ruleTester.run(
         output: `const MyComponent = observer(
   function MyComponent({text}: {text: string}) { return <div>{text}</div>; },
 );`,
+      },
+      {
+        code: "const MyComponent = memo(forwardRef<T>((props, ref) => <div />));",
+        options,
+        errors,
+        output:
+          "const MyComponent = memo(forwardRef<T>(function MyComponent(props, ref) { return <div />; }));",
       },
     ],
   }

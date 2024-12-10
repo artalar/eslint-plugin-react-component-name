@@ -5,39 +5,47 @@ const handler =
   (context: Rule.RuleContext, target: string) =>
   (node: FunctionExpression | ArrowFunctionExpression): void => {
     // @ts-ignore TODO
-    const parentVarName = (node.parent?.parent as any)?.id?.name; // Parent variable name
+    let parent = node.parent?.parent;
+    while (parent && parent.type !== "VariableDeclarator") {
+      parent = parent.parent;
+    }
     // @ts-ignore TODO
-    const functionName = node.id?.name; // Current function name
+    const parentVarName = parent?.id?.name;
 
-    if (!functionName || (parentVarName && functionName !== parentVarName)) {
+    // @ts-ignore TODO
+    const functionName = node.id?.name;
+
+    if (parentVarName ? functionName !== parentVarName : !functionName) {
       context.report({
         node,
         messageId: "noAnonymousFunction",
-        fix: (fixer) => {
-          const sourceCode = context.getSourceCode();
-          const newName = parentVarName || "Anything";
-          const params = node.params
-            .map((param) => sourceCode.getText(param))
-            .join(", ");
+        fix:
+          parentVarName &&
+          ((fixer) => {
+            const sourceCode = context.getSourceCode();
+            const newName = parentVarName;
+            const params = node.params
+              .map((param) => sourceCode.getText(param))
+              .join(", ");
 
-          if (node.type === "ArrowFunctionExpression") {
-            const arrowBody = sourceCode.getText(node.body);
-            const needsBrackets = node.body.type !== "BlockStatement";
-            const newBody = needsBrackets
-              ? `{ return ${arrowBody}; }`
-              : arrowBody;
+            if (node.type === "ArrowFunctionExpression") {
+              const arrowBody = sourceCode.getText(node.body);
+              const needsBrackets = node.body.type !== "BlockStatement";
+              const newBody = needsBrackets
+                ? `{ return ${arrowBody}; }`
+                : arrowBody;
+              return fixer.replaceText(
+                node,
+                `function ${newName}(${params}) ${newBody}`
+              );
+            }
+
+            const functionBody = sourceCode.getText(node.body);
             return fixer.replaceText(
               node,
-              `function ${newName}(${params}) ${newBody}`
+              `function ${newName}(${params}) ${functionBody}`
             );
-          }
-
-          const functionBody = sourceCode.getText(node.body);
-          return fixer.replaceText(
-            node,
-            `function ${newName}(${params}) ${functionBody}`
-          );
-        },
+          }),
       });
     }
   };

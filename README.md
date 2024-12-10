@@ -5,6 +5,7 @@
 - The default ESLint rules for React checking `displayName` property of a component, but has no autofix.
 - There is a few bundlers which support automatic `displayName` inlining, but it isn't universal, as eslint rule.
 - We want to support all kind of decorators like `observer` from 'mobx-react' or `reatomComponent` from '@reatom/npm-react'.
+- Handle nested decorators (e.g. `memo(forwardRef(() => <div />))`)
 - It is important to use **named function** instead of additional `displayName`, to avoid ambiguity in error **stack traces**.
 
 ---
