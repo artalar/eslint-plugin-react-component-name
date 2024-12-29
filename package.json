@@ -24,13 +24,15 @@
     "url": "https://github.com/artalar/eslint-plugin-react-component-name/issues"
   },
   "homepage": "https://github.com/artalar/eslint-plugin-react-component-name#readme",
+  "dependencies": {
+    "@types/eslint": "^8.56.12"
+  },
   "devDependencies": {
-    "@types/eslint": "^9.6.1",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "@typescript-eslint/rule-tester": "^7.18.0",
     "eslint": "^8.57.1",
-    "smartbundle": "^0.11.1",
+    "smartbundle": "^0.12.1",
     "vitest": "^2.1.8"
   }
 }
