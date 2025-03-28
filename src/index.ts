@@ -1,10 +1,19 @@
 import reactComponentNameRule from "./rules/react-component-name.js";
+import type {ESLint} from "eslint";
 
-const rules = {
+export const rules = {
   "react-component-name": reactComponentNameRule,
 };
 
-const configs = {
+export const flatPlugin = {
+  meta: {
+    name: "react-component-name",
+    version: "0.1.0",
+  },
+  rules,
+} satisfies ESLint.Plugin;
+
+export const configs = {
   recommended: {
     parserOptions: {
       ecmaFeatures: {
@@ -21,6 +30,9 @@ const configs = {
 
   flat: {
     recommended: {
+      plugins: {
+        'react-component-name': flatPlugin,
+      },
       rules: {
         "react-component-name/react-component-name": [
           2,
@@ -36,6 +48,9 @@ const configs = {
       },
     },
   },
+} satisfies {
+  recommended: import('eslint').Linter.LegacyConfig,
+  flat: {
+    recommended: import('eslint').Linter.FlatConfig,
+  }
 };
-
-export { rules, configs };

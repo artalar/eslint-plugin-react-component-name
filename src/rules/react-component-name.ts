@@ -1,5 +1,5 @@
-import { Rule } from "eslint";
-import { FunctionExpression, ArrowFunctionExpression } from "estree";
+import type { Rule } from "eslint";
+import type { FunctionExpression, ArrowFunctionExpression } from "estree";
 
 const handler =
   (context: Rule.RuleContext, target: string) =>
