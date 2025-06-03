@@ -4,7 +4,7 @@
 
 - **Autofix** based on variable name.
 - **Better error traces** in console for debug.
-- **Support for any High-order components** and compositions (e.g. MobX's `observer` or nesting like `memo(forwardRef(() => <div />))`)
+- **Support for any High-order components** and compositions (e.g. MobX's `observer`, Reatom's `reatomComponent` or nesting like `memo(forwardRef(() => <div />))`)
 - **Universal** solution based solely on ESLint.
 
 ---
@@ -41,7 +41,7 @@ Also, if you are using "prefer-arrow-callback" rule, it is required to add `allo
     "react-component-name/react-component-name": [
       "error",
       {
-        "targets": ["memo", "forwardRef", "observer"]
+        "targets": ["memo", "forwardRef", "reatomComponent" || "observer"]
       }
     ]
   }
